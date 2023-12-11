@@ -1,0 +1,183 @@
+<h1
+  class="mb-8 mt-8 text-center text-lg font-bold lg:text-xl"
+  [routerLink]="['/organizer-game-page/' + competitionIdForRouting]">
+  Administration
+</h1>
+
+<img
+  class="absolute bottom-0 left-0 -z-10 w-[26%]"
+  src="/assets/icons/PNG_ELEMENTS/100_Top.png"
+  alt="illustration" />
+
+<hf-nav-tabs
+  [firstTabTitle]="'Activate Quiz'"
+  [firstTabLink]="'/organizer-activate-quiz'"
+  [secondTabTitle]="'Released Quizzes'"
+  [secondTabLink]="'/organizer-released-quizzes'" />
+
+<section class="lg:mx-32">
+  <!-- Timer -->
+  <div class="mt-4">
+    <span class="text-base"> Select time to guess </span>
+  </div>
+  <!-- dropdown with times -->
+  <div
+    class="border-secondary mt-4 box-border w-full gap-1 rounded border lg:mt-0 lg:flex">
+    <div class="relative w-full">
+      <button
+        (click)="toggleOpenTimerDropDown()"
+        class="relative flex h-12 w-full items-center rounded border border-neutral-100 bg-white p-4 outline-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-2 h-6 w-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+
+        <span class="">{{
+          selectedTime() !== '' ? selectedTime() + ' minutes' : 'Select a time'
+        }}</span>
+        <svg
+          class="absolute right-2 transition duration-150 ease-linear"
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          fill="#000000">
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path d="M7 10l5 5 5-5H7z" />
+        </svg>
+      </button>
+      <ng-container *ngIf="openTimerDropDown">
+        <!-- Run through all quizzes -->
+        <ng-container *ngFor="let time of allTimes()">
+          <div
+            (click)="handleSelectedTime(time)"
+            class="relative inline-flex h-13 w-full items-center bg-white p-4 transition duration-300 ease-in-out hover:bg-primary hover:text-white">
+            <p>{{ time }} minutes</p>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <!-- QUESTION -->
+  <div class="mt-4">
+    <span class="text-base"> Select quiz to activate</span>
+  </div>
+  <!-- dropdown with questions -->
+  <div
+    class="border-secondary mt-4 box-border w-full gap-1 rounded border lg:mt-0 lg:flex">
+    <div class="relative w-full">
+      <button
+        (click)="toggleOpenQuestionDropDown()"
+        class="relative flex h-12 w-full items-center rounded border border-neutral-100 bg-white p-4 outline-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-2 h-6 w-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+        </svg>
+
+        <span class="">{{
+          selectedQuizQuestion() !== ''
+            ? selectedQuizQuestion()
+            : 'Select a question'
+        }}</span>
+        <svg
+          class="absolute right-2 transition duration-150 ease-linear"
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 0 24 24"
+          width="24px"
+          fill="#000000">
+          <path d="M0 0h24v24H0V0z" fill="none" />
+          <path d="M7 10l5 5 5-5H7z" />
+        </svg>
+      </button>
+      <ng-container *ngIf="openQuestionDropDown">
+        <!-- Run through all quizzes -->
+        <ng-container *ngFor="let quiz of allQuizzes()">
+          <ng-container *ngIf="quiz.state?.id === 3">
+            <div
+              (click)="handleSelectedQuiz(quiz)"
+              class="relative inline-flex h-13 w-full items-center bg-white p-4 transition duration-300 ease-in-out hover:bg-primary hover:text-white">
+              <p>{{ quiz.question }}</p>
+            </div>
+          </ng-container>
+          <!-- if there is no quizzes  -->
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Answer options - Show when quiz is selected -->
+  <ng-container *ngIf="handleShowAnswerOptions()">
+    <div class="mt-4">
+      <span class="text-base"> Answer options </span>
+    </div>
+    <ng-container *ngFor="let answer of selectedQuizAnswers()">
+      <div
+        [ngClass]="{ 'border-primary': !answer.correct }"
+        class="align-items mx-4 mb-2 mt-2 flex items-center justify-between rounded border border-green-800 bg-white p-2 shadow-banner">
+        <span>
+          {{ answer.answer }}
+        </span>
+        <!-- SVG  alt efter om det er rigtigt eller forkert -->
+        <ng-container *ngIf="answer.correct">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            class="h-6 w-6 stroke-green-800">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </ng-container>
+        <ng-container *ngIf="!answer.correct">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            class="h-6 w-6 stroke-primary">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <!-- Show Activate button if time and quiz/question is selected -->
+  <ng-container *ngIf="selectedTime() !== '' && selectedQuizQuestion() !== ''">
+    <div class="my-4 flex justify-center">
+      <button
+        [ngClass]="{
+          'bg-neutral-400': activatedQuiz()?.time !== '00:00' && activatedQuiz()
+        }"
+        [disabled]="activatedQuiz()?.time !== '00:00' && activatedQuiz()"
+        type="button"
+        class="ml-2 flex h-12 items-center rounded bg-primary p-4 text-base font-medium text-white"
+        (click)="handleActivateQuiz()">
+        Activate Quiz
+      </button>
+    </div>
+  </ng-container>
+</section>

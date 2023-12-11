@@ -1,0 +1,97 @@
+<!-- Header -->
+<div class="lg:mx-32">
+  <h1
+    class="mt-8 text-center text-lg font-bold italic text-primary lg:text-lg"
+    [routerLink]="['/rule-breaker']">
+    Rule Breaker
+  </h1>
+  <p class="text-center font-bold">Who can I be with</p>
+  <p class="text-center leading-none">{{ pointSum() }} points</p>
+</div>
+<!-- NorthTech circles images-->
+<img
+  class="absolute right-0 -z-10 w-[26%]"
+  src="/assets/icons/SVG_ELEMENTS/300_Back.svg"
+  alt="illustration" />
+<img
+  class="absolute bottom-0 left-0 -z-10 w-[26%]"
+  src="/assets/icons/PNG_ELEMENTS/100_Top.png"
+  alt="illustration" />
+
+<!-- Carousel with avatars  -->
+<!-- Model template designed by NorthTech, with our own adjustments and logic -->
+<div class="mb-6 mt-6 flex flex-col items-center px-4 lg:mx-32">
+  <ng-container *ngFor="let avatar of avatars | async; let i = index">
+    <div
+      class="rounded-lg border border-neutral-100 bg-orange-100 shadow-lg"
+      *ngIf="i === currentSlide">
+      <h2
+        class="mt-8 text-center text-lg font-bold italic text-primary lg:text-lg">
+        {{ avatar.nickname }}
+      </h2>
+      <img
+        [ngClass]="{
+          'opacity-10 mix-blend-darken': pointSum() <= avatar.minPoints
+        }"
+        src="{{ avatar.avatar }}"
+        alt=""
+        class="" />
+
+      <div class="flex justify-center self-center">
+        <ng-container *ngIf="pointSum() <= avatar.minPoints">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2.5"
+            class="h-6 w-6 self-center stroke-primary">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+          </svg>
+        </ng-container>
+        <p class="m-2 self-center text-center text-lg text-neutral-800">
+          {{ avatar.minPoints }} points
+        </p>
+      </div>
+    </div>
+  </ng-container>
+  <div
+    class="min-h-12 relative mt-2 flex w-full items-center justify-center py-4"
+    *ngIf="(avatarsSize | async)! > 1">
+    <button
+      class="mr-4 rounded bg-primary fill-white hover:bg-orange-600"
+      type="button"
+      (click)="onPreviousClick()">
+      <svg
+        class="rotate-90"
+        xmlns="http://www.w3.org/2000/svg"
+        height="48"
+        viewBox="0 -960 960 960"
+        width="48">
+        <path d="M480-360 280-559h400L480-360Z" />
+      </svg>
+    </button>
+    <div class="flex gap-2">
+      <span
+        *ngFor="let x of avatars | async; let i = index"
+        class="h-4 w-4 cursor-pointer rounded-full bg-neutral-100 transition-colors duration-300 ease-in-out"
+        [ngClass]="{ '!bg-primary': i === currentSlide }"
+        (click)="changeSlide(i)"></span>
+    </div>
+    <button
+      class="ml-4 rounded bg-primary fill-white hover:bg-orange-600"
+      type="button"
+      (click)="onNextClick()">
+      <svg
+        class="-rotate-90"
+        xmlns="http://www.w3.org/2000/svg"
+        height="48"
+        viewBox="0 -960 960 960"
+        width="48">
+        <path d="M480-360 280-559h400L480-360Z" />
+      </svg>
+    </button>
+  </div>
+</div>

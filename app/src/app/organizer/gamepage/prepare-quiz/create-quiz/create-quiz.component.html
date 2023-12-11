@@ -1,0 +1,92 @@
+<h1
+  class="mb-8 mt-8 text-center text-lg font-bold lg:text-xl"
+  [routerLink]="['/organizer-game-page/' + competitionIdForRouting]">
+  Administration
+</h1>
+
+<img
+  class="absolute bottom-0 left-0 -z-10 w-[26%]"
+  src="/assets/icons/PNG_ELEMENTS/100_Top.png"
+  alt="illustration" />
+
+<hf-nav-tabs
+  [firstTabTitle]="createQuiz"
+  [firstTabLink]="'/organizer-create-quiz'"
+  [secondTabTitle]="myQuizzes"
+  [secondTabLink]="'/organizer-my-quizzes'" />
+
+<!-- Create Quiz FORM -->
+<div class="mt-4 flex flex-col lg:mx-32">
+  <label>Write quiz question</label>
+  <input
+    [formControl]="question"
+    required
+    type="text"
+    class="ng-untouched ng-pristine ng-valid mt-1 h-12 w-full rounded border border-primary p-4 font-medium placeholder-default lg:min-w-[360px]" />
+</div>
+
+<!-- Correct Answers FORM -->
+<div class="mt-4 flex flex-col lg:mx-32">
+  <label>Write correct answer</label>
+  <input
+    [formControl]="correctAnswer"
+    required
+    type="text"
+    class="ng-untouched ng-pristine ng-valid mt-1 h-12 w-full rounded border border-green-800 p-4 font-medium placeholder-default lg:min-w-[360px]" />
+</div>
+
+<!-- Other Answers FORM -->
+<div class="mt-4 flex flex-col lg:mx-32">
+  <label>Write other options</label>
+  <div>
+    <input
+      [formControl]="answer1"
+      required
+      type="text"
+      class="ng-untouched ng-pristine ng-valid mt-1 h-12 w-full rounded border border-primary p-4 font-medium placeholder-default lg:min-w-[360px]" />
+  </div>
+  <div [formGroup]="answerGroup">
+    <ng-container *ngFor="let controlName of answerGroup.controls | keyvalue">
+      <input
+        [formControlName]="controlName.key"
+        type="text"
+        class="ng-untouched ng-pristine ng-valid mt-1 h-12 w-full rounded border border-primary p-4 font-medium placeholder-default lg:min-w-[360px]" />
+    </ng-container>
+  </div>
+
+  <div class="flex justify-center">
+    <button
+      type="button"
+      class="my-2 flex h-10 items-center rounded bg-primary p-4 font-medium text-white"
+      (click)="addAnswerRow()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-4 w-4">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<div class="my-4 flex justify-center lg:mx-32">
+  <button
+    type="button"
+    class="ml-2 flex h-12 items-center rounded bg-primary p-4 text-base font-medium text-white"
+    (click)="onCreateQuizInComponent()">
+    Save
+  </button>
+
+  <button
+    type="button"
+    class="ml-2 flex h-12 items-center rounded border border-primary bg-white p-4 text-base font-medium text-primary"
+    (click)="emptyForms()">
+    Discard
+  </button>
+</div>

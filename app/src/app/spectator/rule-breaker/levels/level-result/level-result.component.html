@@ -1,0 +1,88 @@
+<div
+  class="mb-4 mt-4 flex flex-col justify-center self-center rounded bg-orange-100 p-8 text-center text-neutral-800 shadow-md shadow-neutral-400 lg:mx-32">
+  <ng-container *ngFor="let answer of selectedRule?.rulesAnswers">
+    <!-- Your answer is correct -->
+    <ng-container *ngIf="answer.correct && answer.id === selectedRuleAnswerId">
+      <div
+        class="m-2 mb-0 flex self-center text-center text-lg text-neutral-800">
+        <p class="mr-2">Correct answer</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          class="h-7 w-7 stroke-green-800">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span class="text-base">+ {{ answer.point }} points</span>
+      <span class="mt-2 italic">''{{ answer.answer }}''</span>
+    </ng-container>
+
+    <!-- Your answer is wrong -->
+    <ng-container *ngIf="!answer.correct && answer.id === selectedRuleAnswerId">
+      <div
+        class="m-2 mb-0 flex self-center text-center text-lg text-neutral-800">
+        <p class="mr-2">Wrong answer</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          class="h-7 w-7 stroke-red-600">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span class="text-base">+ {{ answer.point }} points</span>
+      <span class="mt-2 italic">''{{ answer.answer }}''</span>
+    </ng-container>
+  </ng-container>
+  <!-- Correct answer for Rule -->
+  <ng-container *ngFor="let answer of selectedRule?.rulesAnswers">
+    <ng-container *ngIf="answer.correct">
+      <div
+        class="m-2 mt-4 flex self-center text-center text-lg text-neutral-800">
+        <p class="mr-2">The correct answer is</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          class="h-7 w-7 stroke-green-800">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span class="italic">''{{ answer.answer }}''</span>
+
+      <!-- TODO more description for correct answer-->
+      <div class="mt-4">
+        <p>{{ answer.explanation }}</p>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="my-4 flex justify-center lg:mx-32">
+  <button
+    [routerLink]="['/rule-breaker']"
+    type="button"
+    class="ml-2 flex h-12 items-center rounded bg-primary p-4 text-base font-medium text-white">
+    Go back
+  </button>
+  <button
+    (click)="onButtonClick()"
+    [routerLink]="['/levels/' + (Number(selectedRule?.level) + 1)]"
+    type="button"
+    class="ml-2 flex h-12 items-center rounded bg-primary p-4 text-base font-medium text-white">
+    Next Rule
+  </button>
+</div>

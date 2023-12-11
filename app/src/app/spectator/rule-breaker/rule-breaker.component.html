@@ -1,0 +1,91 @@
+<img
+  class="absolute bottom-0 left-0 -z-10 w-[26%]"
+  src="/assets/icons/PNG_ELEMENTS/100_Top.png"
+  alt="illustration" />
+<!-- Headline-->
+<h1 class="mt-8 text-center text-lg font-bold italic text-primary lg:text-lg">
+  Rule Breaker
+</h1>
+<!-- Light orange box: Avatar, nickname, points -->
+<div
+  [routerLink]="['/avatars']"
+  class="mb-1 mt-4 grid grid-cols-3 rounded bg-orange-100 px-4 text-base font-medium leading-none text-white lg:mx-32 lg:grid-cols-3 lg:text-lg">
+  <!-- 1. col: Avatar png -->
+  <ng-container *ngFor="let avatar of avatars()">
+    <ng-container
+      *ngIf="pointSum() >= avatar.minPoints && pointSum() < avatar.maxPoints">
+      <div class="col-span-1">
+        <img src="{{ avatar.avatar }}" alt="" />
+      </div>
+      <!-- 2. col: oplysninger -->
+      <div class="col-span-2 flex-col self-center">
+        <h2
+          class="text-center text-lg font-bold italic text-primary lg:text-lg">
+          {{ avatar.nickname }}
+        </h2>
+        <p class="mt-2 text-center text-neutral-800">{{ pointSum() }} points</p>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+<img
+  class="absolute right-0 -z-10 w-[26%]"
+  src="/assets/icons/SVG_ELEMENTS/300_Back.svg"
+  alt="illustration" />
+
+<!-- Game Levels-->
+<div class="mb-2 mr-4 mt-2 p-4 lg:mx-32">
+  <!-- first col: the orange line with bobble levels -->
+  <div class="ml-11 mr-6">
+    <ol class="relative border-l-2 border-orange-500 text-sm font-medium">
+      <!-- extra orange line -->
+      <li class="ml-4 mt-1 h-2"></li>
+      <!-- Level -->
+      <ng-container *ngFor="let rule of rules()">
+        <li class="ml-4 mt-8">
+          <div
+            [ngClass]="{
+              'border border-orange-500 bg-white':
+                breaks().length + 1 < rule.level
+            }"
+            class="absolute -left-2.5 mt-6 h-5 w-5 rounded-full bg-orange-500 dark:border-gray-900 dark:bg-gray-700"></div>
+          <button
+            [disabled]="breaks().length + 1 < rule.level"
+            [routerLink]="['/levels/' + rule.id]"
+            class="align-items mb-2 ml-4 mt-2 flex w-full rounded border border-neutral-100 bg-white p-4 shadow-banner">
+            <ng-container
+              *ngIf="breaks().length + 1 < rule.level; else openLock">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </ng-container>
+            <ng-template #openLock>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </ng-template>
+            <span class="ml-4 text-primary">Level {{ rule.level }}</span>
+          </button>
+        </li>
+      </ng-container>
+    </ol>
+  </div>
+</div>

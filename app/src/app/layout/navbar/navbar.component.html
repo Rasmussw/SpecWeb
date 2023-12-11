@@ -1,0 +1,103 @@
+<div
+  class="flex h-13 items-center justify-between border-b border-neutral-100 bg-white px-4 lg:px-32">
+  <img
+    [routerLink]="[frontpagePath()]"
+    class="mr-auto h-5 cursor-pointer lg:h-8"
+    src="./assets/icons/PNG_LOGO/Lockup_Primary.png" />
+
+  <ng-container
+    *ngIf="hasRoleOrganizer() || hasRoleSpectator(); else loginButton">
+    <button
+      (click)="logout()"
+      type="button"
+      class="text:lg rounded p-2 transition duration-300 ease-in-out hover:bg-orange-100 hover:text-primary">
+      Logout
+    </button>
+  </ng-container>
+  <ng-template #loginButton>
+    <button (click)="modalOpen()" type="button">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="28"
+        viewBox="0 -960 960 960"
+        width="28"
+        class="fill-primary">
+        <path
+          d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38
+        19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5T731-360q31 14 50 41t19 65v94H160Z"></path>
+      </svg>
+    </button>
+  </ng-template>
+</div>
+
+<!-- Model template designed by NorthTech, with our own adjustments and logic -->
+<ng-container *ngIf="isClicked">
+  <div
+    class="top-13 absolute z-30 flex h-full max-h-screen w-screen items-center justify-center bg-[rgb(0,0,0,0.5)] lg:top-[52px]">
+    <div
+      class="relative z-[999] mx-4 flex max-w-[min(500px,_90%)] flex-col items-center rounded bg-white p-4 !opacity-100 lg:mx-32 lg:max-w-[max(40%,_800px)] lg:p-8">
+      <button (click)="modalOpen()">
+        <svg
+          class="absolute right-2 top-2"
+          fill="#000000"
+          height="16px"
+          width="16px"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 490 490">
+          <polygon
+            points="456.851,0 245,212.564 33.149,0 0.708,32.337 212.669,245.004 0.708,457.678 33.149,490 245,277.443 456.851,490,489.292,457.678 277.331,245.004 489.292,32.337 "></polygon>
+        </svg>
+      </button>
+      <h3 class="px-4 text-center text-xl font-bold text-default">
+        ClimbAlong Login
+      </h3>
+      <p class="px-2 py-4 text-center lg:px-8">
+        Upon selecting either 'Me' or 'Organizer,' you will be redirected to a
+        login page providing access to a designated section of ClimbAlong.
+      </p>
+      <hr class="w-full" />
+      <p class="px-2 py-4 text-center lg:px-8">
+        In the absence of a valid login, closing the tab will be necessary to
+        return to the Spectator homepage. Please indicate the specific page you
+        would like to visit.
+      </p>
+      <hr class="w-full" />
+      <div class="flex gap-4 pt-4">
+        <a
+          href="http://localhost:4200/login-spectator"
+          class="align-items-center flex h-12 w-20 justify-between rounded bg-primary p-3 text-base text-white transition duration-300 ease-in-out">
+          Me
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+            class="fill-white">
+            <path
+              d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38
+              19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5T731-360q31 14 50 41t19 65v94H160Z"></path>
+          </svg>
+        </a>
+        <a
+          href="http://localhost:4200/login-organizer"
+          class="align-items-center flex h-12 w-32 justify-between rounded border border-primary p-3 text-primary transition duration-300 ease-in-out hover:bg-orange-100">
+          Organizer
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            class="ml-1 fill-primary">
+            <path
+              d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,
+            0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,
+            5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,
+            0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,
+            0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,
+            0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</ng-container>

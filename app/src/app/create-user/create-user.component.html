@@ -1,0 +1,14 @@
+<div>
+  <h2>Opret bruger</h2>
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <label for="username">Brugernavn:</label>
+    <input type="text" id="username" formControlName="username" />
+
+    <label for="password">Adgangskode:</label>
+    <input type="password" id="password" formControlName="password" />
+
+    <!-- Tilføj flere felter efter behov -->
+
+    <button type="submit" [formAction]="!createUserForm.valid">Opret bruger</button>
+  </form>
+</div>
