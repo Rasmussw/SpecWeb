@@ -3,3 +3,7 @@ services:
     extends:
       file: ./docker-compose-postgresql.yaml
       service: database
+  keycloak:
+    extends:
+      file: ./docker-compose-keycloak.yaml
+      service: keycloak
