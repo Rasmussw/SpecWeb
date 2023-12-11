@@ -1,0 +1,12 @@
+{
+  "groups": [
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "com.example.hovedopgave_game_backend.configuration.DatabaseConfig",
+      "sourceMethod": "springDataSource()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

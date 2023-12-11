@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+
+  <changeSet id="1.0.0:spectator:breaks_table" context="default" author="team">
+    <createTable tableName="breaks" remarks="spectators makes break when on rule">
+      <column name="id" type="serial">
+        <constraints nullable="false" primaryKey="true" unique="true"/>
+      </column>
+
+      <column name="spectator_id" type="integer">
+        <constraints nullable="false"
+                     foreignKeyName="fk_spectator_id"
+                     references="spectators(id)"
+                     unique="false"
+                     deleteCascade="true"/>
+      </column>
+      <column name="rules_answers_id" type="integer">
+        <constraints nullable="false"
+                     foreignKeyName="fk_answer_id"
+                     references="rules_answers(id)"
+                     unique="false"
+                     deleteCascade="true"/>
+      </column>
+
+    </createTable>
+  </changeSet>
+  <!-- READ FORM MOCK DATA CSV FILE -->
+  <changeSet id="1.0.0-mocdata_breaks:spectator" author="team"  context="default">
+    <loadUpdateData tableName="breaks" primaryKey="id"
+                    file="liquibase/mockdata/breaks.csv"/>
+  </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,4 @@
+question,time,spectator_id,competition_id,state_id
+How many climbers participates,NULL,NULL,1,3
+What day is it today,NULL,NULL,2,3
+What is a flash,NULL,NULL,1,2

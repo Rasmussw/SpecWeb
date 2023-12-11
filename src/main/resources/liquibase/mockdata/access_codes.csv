@@ -1,0 +1,11 @@
+code,competition_id,is_activated,spectator_id
+0000000000,1,false,NULL
+1111111111,1,false,NULL
+2222222222,1,false,NULL
+3333333333,1,false,NULL
+4444444444,1,false,NULL
+5555555555,2,false,NULL
+6666666666,2,false,NULL
+7777777777,2,false,NULL
+8888888888,2,false,NULL
+9999999999,2,false,NULL

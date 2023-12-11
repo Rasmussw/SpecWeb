@@ -1,0 +1,33 @@
+id,answer,is_correct,point,rule_id,explanation
+2,Chip,false,7,1,""
+1,Jug,true,10,1,Everyone's best friend. It can be held with one or both hands with a good grip and is usually being used in beginner routes
+3,Makro,false,4,1,
+4,Crimp,false,1,1,
+5,A superhero,false,1,2,
+6,When you complete a problem in your first attempt ,true,10,2,You reach the zone and the top in your first attempt. It requires the climber to both read the route correctly and executed their climb successfully.
+7,When you reach the zone in your first attempt ,false,7,2,
+8,When you win your first competition ,false,4,2,
+9,5 minutes ,true,10,3,"This amount of time is the average amount of time a climber needs. It differs for each competition, but there usually are fixed time-slots so that a climber can't climb the same problem for hours at a time. "
+10,Less than 5 minutes ,false,4,3,
+11,The fastes climber to complete setes the time bar,false,7,3,
+12,As long as they need,false,1,3,
+13,"When the climber reaches the top with both hands, and holds the position for at least 3 seconds",true,10,4,If you can't hold the position at the top for at least 3 seconds then you haven't completed the problem. Neither one hand only or both hands briefly gets you a score.
+14,When the climber reaches the top with both hands,false,7,4,
+15,When the climber reaches the top with one hand,false,4,4,
+16,When the climber reaches the zone ,false,1,4,
+17,Dieder,false,7,5,
+18,Slab,true,10,5,"A Slab is a wall that tilts back away from you, and is thus less steep than a vertical. Climbing a Slab wall requires a lot of technique eventhough it looks more easy."
+19,Face-wall,false,4,5,
+20,Arete,false,1,5,
+21,When the climber touches the wall ,false,7,6,
+22,Only when the zone is reached,false,4,6,
+23,When the climber thinks a real attempt has been made,false,1,6,
+24,When both feet lift off the mattress,true,10,6,"If a climber touches the wall and both feet are lifted off the mattress, then it is recorded as an attempt. So if only one feet is lifted, then it doesn't count as an attempt."
+25,Max. 5-10 attempts ,false,4,7,
+26,Max. 3-4 attempts ,false,7,7,
+27,As many as they want within a fixed time-slot,true,10,7,"This changes from competition to competition. Usually the average time is set to 5 minutes in total, and within that time, they can use as many attempts as they want. "
+28,As many as they want  ,false,1,7,
+29,As few as possible,true,10,8,"The attempts themselves does not get you a first place ranking, but is based on which climber has solved the most problems, and if there is a tie, then the amount of attempts will be considered, and the one with the fewest attempts wins. "
+30,Min. 30 attempts,false,1,8,
+31,Min. 20 attempts ,false,4,8,
+32,Less than 20 attempts ,false,7,8,

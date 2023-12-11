@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+
+  <changeSet id="1.0.0:spectator:rules_table" context="default" author="team">
+    <createTable tableName="rules" remarks="Competitions are climbing events">
+      <column name="id" type="serial">
+        <constraints nullable="false" primaryKey="true" unique="true"/>
+      </column>
+      <column name="level" type="integer">
+        <constraints />
+      </column>
+      <column name="rule_txt" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="rule_image" type="bytea">
+        <constraints nullable="true"/>
+      </column>
+      <column name="rule_video" type="bytea">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <!-- READ FORM MOCK DATA CSV FILE -->
+  <changeSet id="1.0.0-mocdata_rules:spectator" author="team"  context="default">
+    <loadUpdateData tableName="rules" primaryKey="id"
+                    file="liquibase/mockdata/rules.csv"/>
+  </changeSet>
+</databaseChangeLog>

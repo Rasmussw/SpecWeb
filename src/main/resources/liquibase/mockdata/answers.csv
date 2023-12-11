@@ -1,0 +1,13 @@
+answer,is_correct,quiz_id
+12,false,1
+22,false,1
+32,true,1
+42,false,1
+Monday,false,2
+Thuesday,false,2
+Wednesday,false,2
+Thursday,true,2
+A superhero,true,3
+A flashlight movement,false,3
+A sign,false,3
+A jump,false,3

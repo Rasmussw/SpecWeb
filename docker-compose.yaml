@@ -1,0 +1,5 @@
+services:
+  database:
+    extends:
+      file: ./docker-compose-postgresql.yaml
+      service: database

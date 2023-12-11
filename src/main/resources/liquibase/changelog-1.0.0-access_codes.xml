@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+
+    <changeSet id="1.0.0:spectator:access_codes_table" context="default" author="team">
+        <createTable tableName="access_codes" remarks="Competitions are climbing events">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="code" type="varchar(255)" >
+                <constraints unique="true"/>
+            </column>
+            <column name="competition_id" type="integer">
+                <constraints nullable="false"
+                             foreignKeyName="fk_competition_id"
+                             references="competitions(id)"
+                             unique="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="spectator_id" type="integer">
+                <constraints nullable="true"
+                             foreignKeyName="fk_spectator_id"
+                             references="spectators(id)"
+                             unique="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="is_activated" type="boolean" >
+                <constraints/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- READ FORM MOCK DATA CSV FILE -->
+    <changeSet id="1.0.0-mocdata_access_codes:spectator" author="team"  context="default">
+        <loadUpdateData tableName="access_codes" primaryKey="id"
+                        file="liquibase/mockdata/access_codes.csv"/>
+    </changeSet>
+</databaseChangeLog>
+

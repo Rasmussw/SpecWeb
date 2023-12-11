@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+
+    <changeSet id="1.0.0:spectator:guesses_table" context="default" author="team">
+        <createTable tableName="guesses" remarks="spectators makes guesses when a quiz is guessable">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+
+            <column name="spectator_id" type="integer">
+                <constraints nullable="false"
+                             foreignKeyName="fk_spectator_id"
+                             references="spectators(id)"
+                             unique="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="answer_id" type="integer">
+                <constraints nullable="false"
+                             foreignKeyName="fk_answer_id"
+                             references="answers(id)"
+                             unique="false"
+                             deleteCascade="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+  <!-- READ FORM MOCK DATA CSV FILE -->
+  <changeSet id="1.0.0-mocdata_guesses:spectator" author="team"  context="default">
+    <loadUpdateData tableName="guesses" primaryKey="id"
+                    file="liquibase/mockdata/guesses.csv"/>
+  </changeSet>
+</databaseChangeLog>
+
